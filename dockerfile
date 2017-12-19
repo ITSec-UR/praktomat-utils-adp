@@ -39,11 +39,10 @@ COPY local.py /var/www/Praktomat/src/settings/local.py \
  && default.py /var/www/Praktomat/src/settings/default.py \
  && Builder.py /var/www/Praktomat/src/checker/compiler/Builder.py \
  && CBuilder.py /var/www/Praktomat/src/checker/compiler/CBuilder.py
- # TODO ******* check required permissions*********
-RUN chmod /var/www/Praktomat/src/settings/local.py \ 
- && chmod /var/www/Praktomat/src/settings/default.py \
- && chmod /var/www/Praktomat/src/checker/compiler/Builder.py \
- && chmod /var/www/Praktomat/src/checker/compiler/CBuilder.py
+RUN chmod 755 /var/www/Praktomat/src/settings/local.py \ 
+ && chmod 755 /var/www/Praktomat/src/settings/default.py \
+ && chmod 755 /var/www/Praktomat/src/checker/compiler/Builder.py \
+ && chmod 755 /var/www/Praktomat/src/checker/compiler/CBuilder.py
 
  
  
