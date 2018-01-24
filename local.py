@@ -93,7 +93,7 @@ if "tba" in PRAKTOMAT_ID:
 # Example: "/home/media/media.lawrence.com/"
 UPLOAD_ROOT = join(dirname(PRAKTOMAT_PATH), "PraktomatSupport/")
 
-	SANDBOX_DIR = join('/var/www/Praktomat/PraktomatSupport/SolutionSandbox/', PRAKTOMAT_ID)
+SANDBOX_DIR = join('/var/www/Praktomat/PraktomatSupport/SolutionSandbox/', PRAKTOMAT_ID)
 
 
 ADMINS = [
@@ -101,17 +101,17 @@ ADMINS = [
 ]
 
 
-if MIRROR:
-	EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-	EMAIL_FILE_PATH = join(UPLOAD_ROOT, "sent-mails")
-else:
-	EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-	EMAIL_HOST = "localhost"
-	EMAIL_PORT = 25
+#if MIRROR:
+#	EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+#	EMAIL_FILE_PATH = join(UPLOAD_ROOT, "sent-mails")
+#else:
+#	EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#	EMAIL_HOST = "localhost"
+#	EMAIL_PORT = 25
 
 DEFAULT_FROM_EMAIL = "root@praktomat.uni-regensburg.de"
 
-DEBUG = MIRROR
+#DEBUG = MIRROR
 
 DATABASES = {
     'default': {
@@ -142,9 +142,6 @@ JPLAGJAR = '/srv/praktomat/contrib/jplag.jar'
 # Our VM has 4 cores, so lets try to use them
 NUMBER_OF_TASKS_TO_BE_CHECKED_IN_PARALLEL = 6
 # But not with Isabelle, which is memory bound
-if match.group('tba') is not None:
-    NUMBER_OF_TASKS_TO_BE_CHECKED_IN_PARALLEL = 1
-
 # Finally load defaults for missing setttings.
 import defaults
 defaults.load_defaults(globals())
