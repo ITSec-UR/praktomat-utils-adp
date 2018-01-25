@@ -36,7 +36,7 @@ RUN git clone --recursive git://github.com/KITPraktomatTeam/Praktomat.git \
 # echo "local praktomat_1 www-data trust" ) >> /etc/postgresql/9.5/main/pg_hba.config
  
 
-# Add custom config files from repository
+# Add custom config files from praktomat repository
 COPY local.py /var/www/Praktomat/src/settings/local.py \
  && defaults.py /var/www/Praktomat/src/settings/default.py \
  && Builder.py /var/www/Praktomat/src/checker/compiler/Builder.py \
