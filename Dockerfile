@@ -57,7 +57,7 @@ RUN ./Praktomat/src/manage-local.py collectstatic --noinput -link
 
  
 # Set permissions for Praktomat directory
-RUN RUN adduser --disabled-password --gecos '' praktomat
+RUN RUN adduser --disabled-password --gecos '' praktomat \
  && chmod -R 0775 Praktomat/ \
  && chown -R praktomat Praktomat/ \
  && chgrp -R praktomat Praktomat/ \
