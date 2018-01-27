@@ -6,12 +6,31 @@ MAINTAINER Christoph Schreyer <christoph.schreyer@stud.uni-regensburg.de>
 
 # Install required packages
 RUN apt-get update \
- && apt-get -y install apache2 libpq-dev zlib1g-dev libmysqlclient-dev libsasl2-dev libssl-dev swig libapache2-mod-xsendfile libapache2-mod-wsgi openjdk-8-jdk junit junit4 dejagnu gcj-jdk git-core mutt \
- && apt-get -y install python2.7-dev python-setuptools python-psycopg2 python-m2crypto \
- && apt-get -y install python-pip \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install \
+ apache2 \
+ libpq-dev \ 
+ zlib1g-dev \
+ libmysqlclient-dev \
+ libsasl2-dev \
+ libssl-dev \
+ swig \
+ libapache2-mod-xsendfile \
+ libapache2-mod-wsgi \
+ openjdk-8-jdk \
+ junit \
+ junit4 \
+ dejagnu \
+ gcj-jdk \
+ git-core \
+ mutt
+RUN apt-get -y install \
+ python2.7-dev \
+ python-setuptools \
+ python-psycopg2 \
+ python-m2crypto \
+ python-pip \
  && rm -rf /var/lib/apt/lists/*
 
- 
 RUN pip install --upgrade pip
  
  
