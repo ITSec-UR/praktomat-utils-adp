@@ -35,7 +35,7 @@ RUN pip install --upgrade pip
  
  
 # Download & Install Praktomat
-WORKDIR /var/www
+WORKDIR /var/www/
 RUN git clone --recursive git://github.com/KITPraktomatTeam/Praktomat.git \
  && pip install -r Praktomat/requirements.txt
 
@@ -56,11 +56,11 @@ RUN git clone --recursive git://github.com/KITPraktomatTeam/Praktomat.git \
  
 
 # Add custom config files from praktomat repository
-COPY ./local.py Praktomat/src/settings/local.py \
- && ./defaults.py Praktomat/src/settings/defaults.py \
- && ./Builder.py Praktomat/src/checker/compiler/Builder.py \
- && ./CBuilder.py Praktomat/src/checker/compiler/CBuilder.py \
- && ./manage-local.py Praktomat/src/manage-local.py
+COPY ./local.py /var/www/Praktomat/src/settings/local.py \
+ && ./defaults.py /var/www/Praktomat/src/settings/defaults.py \
+ && ./Builder.py /var/www/Praktomat/src/checker/compiler/Builder.py \
+ && ./CBuilder.py /var/www/Praktomat/src/checker/compiler/CBuilder.py \
+ && ./manage-local.py /var/www/Praktomat/src/manage-local.py
  
 RUN chmod 755 /var/www/Praktomat/src/settings/local.py \ 
  && chmod 755 /var/www/Praktomat/src/settings/defaults.py \
