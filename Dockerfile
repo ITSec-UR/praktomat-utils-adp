@@ -69,7 +69,7 @@ RUN chmod -R 0775 Praktomat/ \
 # Migrate database
 USER praktomat
 WORKDIR /var/www
-RUN ./Praktomat/src/manage-local.py migrate --noinput
+# RUN ./Praktomat/src/manage-local.py migrate --noinput
  
  
 #TODO: nginx config
