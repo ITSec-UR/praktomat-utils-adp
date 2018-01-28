@@ -39,17 +39,17 @@ WORKDIR /var/www/
 RUN git clone --recursive git://github.com/KITPraktomatTeam/Praktomat.git \
  && pip install -r Praktomat/requirements.txt
 
-ADD local.py Praktomat/src/settings/local.py 
-# && ./defaults.py /var/www/Praktomat/src/settings/defaults.py \
-# && ./Builder.py /var/www/Praktomat/src/checker/compiler/Builder.py \
-# && ./CBuilder.py /var/www/Praktomat/src/checker/compiler/CBuilder.py \
-# && ./manage-local.py /var/www/Praktomat/src/manage-local.py
+COPY local.py Praktomat/src/settings/local.py 
+COPY defaults.py Praktomat/src/settings/defaults.py
+COPY Builder.py Praktomat/src/checker/compiler/Builder.py 
+COPY CBuilder.py Praktomat/src/checker/compiler/CBuilder.py 
+COPY manage-local.py Praktomat/src/manage-local.py
  
-RUN chmod 755 /var/www/Praktomat/src/settings/local.py \ 
- && chmod 755 /var/www/Praktomat/src/settings/defaults.py \
- && chmod 755 /var/www/Praktomat/src/checker/compiler/Builder.py \
- && chmod 755 /var/www/Praktomat/src/checker/compiler/CBuilder.py \
- && chmod 755 /var/www/Praktomat/src/manage-local.py
+RUN chmod 755 Praktomat/src/settings/local.py \ 
+ && chmod 755 Praktomat/src/settings/defaults.py \
+ && chmod 755 Praktomat/src/checker/compiler/Builder.py \
+ && chmod 755 Praktomat/src/checker/compiler/CBuilder.py \
+ && chmod 755 Praktomat/src/manage-local.py
  
  
 # Create and initialize directories
@@ -59,8 +59,8 @@ RUN ./Praktomat/src/manage-local.py collectstatic --noinput -link
 
  
 # Set permissions for Praktomat directory
-RUN RUN adduser --disabled-password --gecos '' praktomat \
- && chmod -R 0775 Praktomat/ \
+RUN adduser --disabled-password --gecos '' praktomat
+RUN chmod -R 0775 Praktomat/ \
  && chown -R praktomat Praktomat/ \
  && chgrp -R praktomat Praktomat/ \
  && adduser www-data praktomat
