@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 import sys
-reload sys
+reload(sys)
 sys.setdefaultencoding('utf8')
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings.local')
