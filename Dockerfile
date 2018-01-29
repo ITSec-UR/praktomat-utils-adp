@@ -39,6 +39,23 @@ WORKDIR /var/www/
 RUN git clone --recursive git://github.com/KITPraktomatTeam/Praktomat.git \
  && pip install -r Praktomat/requirements.txt
 
+ # Add virtualenv here if postgres has issues
+ 
+# Do postgres stuff (should already be set up)
+# RUN psql --username=postgres \
+# && CREATE USER praktomat; \
+# && CREATE DATABASE praktomat_1; \
+# && ALTER DATABASE praktomat_1 OWNER TO praktomat; \
+# && CREATE ROLE www-data IN ROLE praktomat; \
+# && \q 
+
+# RUN ( \
+# echo "" && \
+# echo "local praktomat_1 praktomat trust" && \
+# echo "local praktomat_1 www-data trust" ) >> /etc/postgresql/9.5/main/pg_hba.config
+ 
+
+# Add custom config files from praktomat repository
 COPY local.py Praktomat/src/settings/local.py 
 COPY defaults.py Praktomat/src/settings/defaults.py
 COPY Builder.py Praktomat/src/checker/compiler/Builder.py 
