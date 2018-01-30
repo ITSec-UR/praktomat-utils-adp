@@ -95,4 +95,4 @@ WORKDIR /var/www
 #TODO: provide safe-docker-image as base image
 
 
-# EXPOSE 80 443
+EXPOSE 9002
