@@ -61,7 +61,7 @@ PRAKTOMAT_ID = basename(dirname(PRAKTOMAT_PATH))
 SITE_NAME = 'Praktomat Lehrstuhl Kesdogan'
 # The URL where this site is reachable. 'http://localhost:8000/' in case of the
 # developmentserver.
-BASE_HOST = 'praktomat1.ddnss.de'
+BASE_HOST = 'praktomat.anon-next.de'
 BASE_PATH = '/'
 
 ALLOWED_HOSTS = [ '*' ]
