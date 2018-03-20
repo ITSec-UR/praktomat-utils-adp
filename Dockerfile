@@ -101,8 +101,8 @@ RUN apt-get update \
  && apt-get -y install linux-image-extra-$(uname -r)
 RUN apt-get -y install docker-engine
 RUN service docker start \
- && echo -e '%praktomat ALL=NOPASSWD:ALL\npraktomat ALL=NOPASSWD:ALL\nwww-data ALL=NOPASSWD:ALL\ndeveloper ALL=NOPASSWD:ALL\npraktomat ALL= NOPASSWD: /usr/local/bin/safe-docker' | sudo EDITOR='tee -a' visudo \
- && echo -e 'www-data ALL=(TESTER)NOPASSWD:ALL\npraktomat ALL=(TESTER)NOPASSWD:ALL, NOPASSWD:/usr/local/bin/safe-docker' | sudo EDITOR='tee -a' visudo -f /etc/sudoers.d/praktomat_tester
+ && echo -e '%praktomat ALL=NOPASSWD:ALL\npraktomat ALL=NOPASSWD:ALL\nwww-data ALL=NOPASSWD:ALL\ndeveloper ALL=NOPASSWD:ALL\npraktomat ALL= NOPASSWD: /usr/local/bin/safe-docker' | EDITOR='tee -a' visudo \
+ && echo -e 'www-data ALL=(TESTER)NOPASSWD:ALL\npraktomat ALL=(TESTER)NOPASSWD:ALL, NOPASSWD:/usr/local/bin/safe-docker' | EDITOR='tee -a' visudo -f /etc/sudoers.d/praktomat_tester
 RUN docker build -t safe-docker docker-image
 
 
