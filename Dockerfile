@@ -101,6 +101,7 @@ RUN echo 'deb http://apt.dockerproject.org/repo ubuntu-xenial main' >> /etc/apt/
 RUN apt-get update \
  && apt-get -y install linux-image-extra-$(uname -r)
 RUN apt-get -y install docker-engine
+RUN mkdir /etc/sudoers.d
 RUN service docker start \
  && echo -e '%praktomat ALL=NOPASSWD:ALL\npraktomat ALL=NOPASSWD:ALL\nwww-data ALL=NOPASSWD:ALL\ndeveloper ALL=NOPASSWD:ALL\npraktomat ALL= NOPASSWD: /usr/local/bin/safe-docker' >> /etc/sudoers \
  && echo -e 'www-data ALL=(TESTER)NOPASSWD:ALL\npraktomat ALL=(TESTER)NOPASSWD:ALL, NOPASSWD:/usr/local/bin/safe-docker' >> /etc/sudoers.d/praktomat_tester
