@@ -22,8 +22,7 @@ RUN apt-get update \
  dejagnu \
  gcj-jdk \
  git-core \
- mutt \
- docker-engine
+ mutt
 RUN apt-get -y install \
  python2.7-dev \
  python-setuptools \
@@ -97,6 +96,11 @@ RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 581
 
 # Docker setup
 WORKDIR /var/www/Praktomat/
+RUN echo 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' >> /etc/apt/sources.list.d/docker.list \
+ && apt-get update \
+ && apt-get -y install \
+ linux-image-extra-$(uname -r) \
+ docker-engine
 RUN service docker start \
  && echo -e '%praktomat ALL=NOPASSWD:ALL\npraktomat ALL=NOPASSWD:ALL\nwww-data ALL=NOPASSWD:ALL\ndeveloper ALL=NOPASSWD:ALL\npraktomat ALL= NOPASSWD: /usr/local/bin/safe-docker' | sudo EDITOR='tee -a' visudo \
  && echo -e 'www-data ALL=(TESTER)NOPASSWD:ALL\npraktomat ALL=(TESTER)NOPASSWD:ALL, NOPASSWD:/usr/local/bin/safe-docker' | sudo EDITOR='tee -a' visudo -f /etc/sudoers.d/praktomat_tester
