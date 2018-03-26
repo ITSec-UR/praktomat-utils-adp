@@ -1,4 +1,7 @@
 #!/bin/bash
-/var/www/Praktomat/src/manage-local.py makemigrations
-/var/www/Praktomat/src/manage-local.py migrate --noinput
-#systemctl set-property docker.service TasksMax=4096
+if [ ! -f /tmp/init-script-completed ]; then
+    /var/www/Praktomat/src/manage-local.py makemigrations
+    /var/www/Praktomat/src/manage-local.py migrate --noinput
+
+    touch /tmp/init-script-completed
+fi

@@ -108,7 +108,6 @@ RUN echo -e '%praktomat ALL=NOPASSWD:ALL\npraktomat ALL=NOPASSWD:ALL\nwww-data A
 # RUN docker build -t safe-docker docker-image
 
 
-#TODO: nginx config
 #TODO: kernel swap mem config
 
 
