@@ -67,7 +67,7 @@ COPY manage-local.py Praktomat/src/manage-local.py
 COPY createkey.py /srv/praktomat/mailsign/createkey.py
 COPY safe-Dockerfile Praktomat/docker-image/Dockerfile
 COPY safe-docker /usr/local/bin/safe-docker
-COPY debug_toolbar /usr/local/lib/python2.7/dist-packages/debug_toolbar
+COPY debug_toolbar /usr/local/lib/python2.7/dist-packages/debug_toolbar # could cause issues for clean installations
 COPY praktomat.conf /etc/apache2/sites-available/praktomat.conf
  
 RUN chmod 755 Praktomat/src/settings/local.py \ 
@@ -79,8 +79,10 @@ RUN chmod 755 Praktomat/src/settings/local.py \
  && chmod 755 Praktomat/docker-image/Dockerfile \
  && chmod 755 /usr/local/bin/safe-docker
  
+# Configure apache
 RUN service apache2 start \ 
  && a2enmod wsgi \
+ && a2enmod rewrite \
  && a2ensite praktomat.conf \
  && service apache2 restart 
  
