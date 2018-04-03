@@ -81,12 +81,6 @@ RUN chmod 755 Praktomat/src/settings/local.py \
  && chmod 755 Praktomat/docker-image/Dockerfile \
  && chmod 755 /usr/local/bin/safe-docker
  
-# Configure apache
-RUN service apache2 start \ 
- && a2enmod wsgi \
- && a2enmod rewrite \
- && a2ensite praktomat.conf \
- && service apache2 restart 
  
 # Migrate changes
 RUN ./Praktomat/src/manage-devel.py migrate --noinput
@@ -99,6 +93,15 @@ RUN chmod -R 0775 Praktomat/ \
  && chown -R praktomat Praktomat/ \
  && chgrp -R praktomat Praktomat/ \
  && adduser www-data praktomat
+ 
+ 
+ # Configure apache
+RUN service apache2 start \ 
+ && a2enmod wsgi \
+ && a2enmod rewrite \
+ && a2ensite praktomat.conf \
+ && service apache2 restart 
+ 
 
 # Add mailsign
 WORKDIR /srv/praktomat/mailsign/
