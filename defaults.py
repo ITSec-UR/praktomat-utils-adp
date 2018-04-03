@@ -276,7 +276,7 @@ def load_defaults(settings):
  
     # Alternatively: Run everything in a docker instance, to provide higher
     # insulation. Should not be used together iwth USEPRAKTOMATTESTER.
-    d.USESAFEDOCKER = False
+    d.USESAFEDOCKER = True
 
     # Make sure uploaded solution are not work-readable
     d.FILE_UPLOAD_PERMISSIONS = 0640

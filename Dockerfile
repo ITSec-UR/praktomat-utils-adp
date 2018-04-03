@@ -67,6 +67,8 @@ COPY manage-local.py Praktomat/src/manage-local.py
 COPY createkey.py /srv/praktomat/mailsign/createkey.py
 COPY safe-Dockerfile Praktomat/docker-image/Dockerfile
 COPY safe-docker /usr/local/bin/safe-docker
+COPY debug_toolbar /usr/local/lib/python2.7/dist-packages/debug_toolbar
+COPY praktomat.conf /etc/apache2/sites-available/praktomat.conf
  
 RUN chmod 755 Praktomat/src/settings/local.py \ 
  && chmod 755 Praktomat/src/settings/defaults.py \
@@ -77,6 +79,10 @@ RUN chmod 755 Praktomat/src/settings/local.py \
  && chmod 755 Praktomat/docker-image/Dockerfile \
  && chmod 755 /usr/local/bin/safe-docker
  
+RUN service apache2 start \ 
+ && a2enmod wsgi \
+ && a2ensite praktomat.conf \
+ && service apache2 restart 
  
 # Migrate changes
 RUN ./Praktomat/src/manage-devel.py migrate --noinput
