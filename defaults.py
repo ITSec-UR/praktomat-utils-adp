@@ -383,4 +383,4 @@ def show_toolbar(request):
         return False
 
     # return True here to enable the debug toolbar
-return True
+    return True
