@@ -28,6 +28,7 @@ match = re.match(r'''
 	''', PRAKTOMAT_ID, flags=re.VERBOSE)
 
 SITE_NAME = 'Praktomat Lehrstuhl Kesdogan'
+MIRROR = False
 
 # The URL where this site is reachable. 'http://localhost:8000/' in case of the
 # developmentserver.
