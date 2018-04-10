@@ -8,7 +8,7 @@
 from os.path import join, dirname, basename
 import re
 
-PRAKTOMAT_PATH = '/var/www/Praktomat'
+PRAKTOMAT_PATH = '/var/www/Praktomat/'
 
 PRAKTOMAT_ID = basename(dirname(PRAKTOMAT_PATH))
 
