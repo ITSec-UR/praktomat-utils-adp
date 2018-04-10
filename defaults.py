@@ -113,11 +113,12 @@ def load_defaults(settings):
     # Template file path is set in template section
 
     d.STATICFILES_DIRS = (
-        join(PRAKTOMAT_ROOT, "media"),
+	     "/var/www/Praktomat/media/"
+    #    join(PRAKTOMAT_ROOT, "media"),
     )
 
-    d.STATIC_ROOT = join(PRAKTOMAT_ROOT, "static")
-
+    #d.STATIC_ROOT = join(PRAKTOMAT_ROOT, "static")
+    d.STATIC_ROOT = "/var/www/Praktomat/static/"
 
     # This directory is used to compiling and running the users code.
     # As such it is temporary, and might be put on a tmpfs mount, to speed
