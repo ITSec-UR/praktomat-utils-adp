@@ -110,10 +110,7 @@ def load_defaults(settings):
     d.DEFAULT_FILE_STORAGE = 'utilities.storage.UploadStorage'
 
     # URL and file paths
-
-    d.TEMPLATE_DIRS = (
-        join(PRAKTOMAT_ROOT, "src", "templates"),
-    )
+    # Template file path is set in template section
 
     d.STATICFILES_DIRS = (
         join(PRAKTOMAT_ROOT, "media"),
@@ -166,28 +163,31 @@ def load_defaults(settings):
 
     # Templates
 
-    # A boolean that turns on/off template debug mode. If this is True, the fancy 
-    # error page will display a detailed report for any TemplateSyntaxError. 
-    # Note that Django only displays fancy error pages if DEBUG is True.
-    d.TEMPLATE_DEBUG = True
-
-    # List of callables that know how to import templates from various sources.
-    d.TEMPLATE_LOADERS = (
-        'django.template.loaders.filesystem.Loader',
-        'django.template.loaders.app_directories.Loader',
-    )
-
-    d.TEMPLATE_CONTEXT_PROCESSORS = (
-        'context_processors.settings.from_settings',
-        'django.contrib.auth.context_processors.auth',
-        'django.core.context_processors.debug',
-        'django.core.context_processors.i18n',
-        'django.core.context_processors.media',
-        'django.core.context_processors.request',
-        'django.core.context_processors.static',
-        'django.contrib.messages.context_processors.messages',
-    )
-
+    d.TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [
+                join(PRAKTOMAT_ROOT, "src", "templates"),
+            ],
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'context_processors': [
+                    'context_processors.settings.from_settings',
+                    'django.contrib.auth.context_processors.auth',
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.i18n',
+                    'django.template.context_processors.media',
+                    'django.template.context_processors.request',
+                    'django.template.context_processors.static',
+                    'django.contrib.messages.context_processors.messages',
+                ],
+                # A boolean that turns on/off template debug mode. If this is True, the fancy
+                # error page will display a detailed report for any TemplateSyntaxError.
+                # Note that Django only displays fancy error pages if DEBUG is True.
+                'debug': True
+            },
+        },
+    ]
 
     # Database
 
@@ -205,7 +205,7 @@ def load_defaults(settings):
     d.DEFAULT_FROM_EMAIL = "kesdogan.technik@ur.de"
     d.EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     d.EMAIL_HOST = "127.0.0.1"
-    d.EMAIL_PORT = 587
+    d.EMAIL_PORT = 26
     d.EMAIL_HOST_USER = ""
     d.EMAIL_HOST_PASSWORD = ""
     d.EMAIL_USE_TLS = False
@@ -232,6 +232,7 @@ def load_defaults(settings):
     }
     d.TINYMCE_SPELLCHECKER = False
     d.TINYMCE_COMPRESSOR = False
+    d.TINYMCE_INCLUDE_JQUERY = False
 
     #############################################################################
     # Praktomat-specific settings                                               #
@@ -314,7 +315,7 @@ def load_defaults(settings):
     # Length of timeout applied whenever an external check that runs a students
     # submission is executed,
     # for example: JUnitChecker, DejaGnuChecker
-    d.TEST_TIMEOUT=60
+    d.TEST_TIMEOUT=20
 
     # Amount of memory available to the checker, in megabytes
     # (this is currently only supported with USESAFEDOCKER=True)
@@ -382,4 +383,4 @@ def show_toolbar(request):
         return False
 
     # return True here to enable the debug toolbar
-    return True
+return True

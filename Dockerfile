@@ -69,7 +69,6 @@ COPY safe-Dockerfile Praktomat/docker-image/Dockerfile
 COPY safe-docker /usr/local/bin/safe-docker
 RUN ls -lah /usr/local/lib/python2.7/dist-packages/
 RUN ls -lah /usr/local/lib/python2.7/dist-packages/debug_toolbar/
-COPY debug_toolbar/ /usr/local/lib/python2.7/dist-packages/debug_toolbar/
 COPY praktomat.conf /etc/apache2/sites-available/praktomat.conf
  
 RUN chmod 755 Praktomat/src/settings/local.py \ 
