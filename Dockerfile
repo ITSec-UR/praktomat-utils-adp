@@ -64,6 +64,7 @@ COPY defaults.py Praktomat/src/settings/defaults.py
 COPY Builder.py Praktomat/src/checker/compiler/Builder.py 
 COPY CBuilder.py Praktomat/src/checker/compiler/CBuilder.py 
 COPY manage-local.py Praktomat/src/manage-local.py
+COPY models.py Praktomat/src/configuration/models.py
 COPY createkey.py /srv/praktomat/mailsign/createkey.py
 COPY safe-Dockerfile Praktomat/docker-image/Dockerfile
 COPY safe-docker /usr/local/bin/safe-docker
@@ -75,6 +76,7 @@ RUN chmod 755 Praktomat/src/settings/local.py \
  && chmod 755 Praktomat/src/checker/compiler/Builder.py \
  && chmod 755 Praktomat/src/checker/compiler/CBuilder.py \
  && chmod 755 Praktomat/src/manage-local.py \
+ && chmod 755 Praktomat/src/configuration/models.py \
  && chmod 755 /srv/praktomat/mailsign/createkey.py \
  && chmod 755 Praktomat/docker-image/Dockerfile \
  && chmod 755 /usr/local/bin/safe-docker
