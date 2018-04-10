@@ -113,7 +113,7 @@ def load_defaults(settings):
     # Template file path is set in template section
 
     d.STATICFILES_DIRS = (
-	     "/var/www/Praktomat/media/"
+	     "/var/www/Praktomat/media/",
     #    join(PRAKTOMAT_ROOT, "media"),
     )
 
