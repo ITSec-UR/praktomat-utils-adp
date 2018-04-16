@@ -81,7 +81,12 @@ RUN chmod 755 Praktomat/src/settings/local.py \
  && chmod 755 Praktomat/docker-image/Dockerfile \
  && chmod 755 /usr/local/bin/safe-docker
  
- 
+#change grub
+RUN sed -i 's/""/"cgroup_enable=memory swapaccount=1"/g' /etc/default/grub \
+ && sed -i 's/"quiet splash"/"cgroup_enable=memory swapaccount=1"/g' /etc/default/grub
+RUN update-grub
+
+
 # Migrate changes
 RUN ./Praktomat/src/manage-devel.py migrate --noinput
 RUN ./Praktomat/src/manage-local.py collectstatic --noinput -link
@@ -115,7 +120,7 @@ RUN apt-get update \
  && apt-get -y install linux-image-extra-$(uname -r)
 RUN apt-get -y install docker-engine
 RUN mkdir /etc/sudoers.d
-RUN echo -e '%praktomat ALL=NOPASSWD:ALL\npraktomat ALL=NOPASSWD:ALL\nwww-data ALL=NOPASSWD:ALL\ndeveloper ALL=NOPASSWD:ALL\npraktomat ALL= NOPASSWD: /usr/local/bin/safe-docker' >> /etc/sudoers \
- && echo -e 'www-data ALL=(TESTER)NOPASSWD:ALL\npraktomat ALL=(TESTER)NOPASSWD:ALL, NOPASSWD:/usr/local/bin/safe-docker' >> /etc/sudoers.d/praktomat_tester
+RUN echo 'Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"\n\nroot    ALL=(ALL:ALL) ALL\n\n%sudo   ALL=(ALL:ALL) ALL\n\n%praktomat ALL=NOPASSWD:ALL\npraktomat ALL=NOPASSWD:ALL\nwww-data ALL=NOPASSWD:ALL\ndeveloper ALL=NOPASSWD:ALL\npraktomat ALL= NOPASSWD: /usr/local/bin/safe-docker' >> /etc/sudoers \
+ && echo 'www-data ALL=(TESTER)NOPASSWD:ALL\npraktomat ALL=(TESTER)NOPASSWD:ALL, NOPASSWD:/usr/local/bin/safe-docker' >> /etc/sudoers.d/praktomat_tester
 
 EXPOSE 9002
