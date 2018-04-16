@@ -81,11 +81,6 @@ RUN chmod 755 Praktomat/src/settings/local.py \
  && chmod 755 Praktomat/docker-image/Dockerfile \
  && chmod 755 /usr/local/bin/safe-docker
  
-#change grub
-RUN sed -i 's/""/"cgroup_enable=memory swapaccount=1"/g' /etc/default/grub \
- && sed -i 's/"quiet splash"/"cgroup_enable=memory swapaccount=1"/g' /etc/default/grub
-RUN update-grub
-
 
 # Migrate changes
 RUN ./Praktomat/src/manage-devel.py migrate --noinput
