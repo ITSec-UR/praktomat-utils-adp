@@ -32,7 +32,7 @@ MIRROR = False
 
 # The URL where this site is reachable. 'http://localhost:8000/' in case of the
 # developmentserver.
-BASE_HOST = 'https://praktomat.anon-next.de'
+BASE_HOST = 'https://praktomat.itsec.ur.de
 # BASE_PATH = '/' + PRAKTOMAT_ID + '/'
 BASE_PATH = '/'
 
