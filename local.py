@@ -84,7 +84,7 @@ else:
 
 DEFAULT_FROM_EMAIL = "kesdogan.technik@ur.de"
 
-DEBUG = True
+DEBUG = False
 
 DATABASES = {
     'default': {
