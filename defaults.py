@@ -42,7 +42,7 @@ def load_defaults(settings):
     # are inappropriate for public consumption. File paths, configuration options, 
     # and the like all give attackers extra information about your server.
     # Never deploy a site into production with DEBUG turned on.
-    d.DEBUG = False
+    d.DEBUG = True
 
     # Local time zone for this installation. Choices can be found here:
     # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -384,4 +384,4 @@ def show_toolbar(request):
         return False
 
     # return True here to enable the debug toolbar
-    return False
+    return True
