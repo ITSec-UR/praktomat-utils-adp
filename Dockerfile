@@ -112,7 +112,7 @@ RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 581
 WORKDIR /var/www/Praktomat/
 RUN echo 'deb http://apt.dockerproject.org/repo ubuntu-xenial main' >> /etc/apt/sources.list.d/docker.list
 RUN apt-get update \
- && apt-get -y install linux-image-extra-$(uname -r)
+ && apt-get -y install linux-image-extra-4.4.0-128-generic
 RUN apt-get -y install docker-engine
 RUN service docker start
 RUN apt-get --trivial-only install sudo
