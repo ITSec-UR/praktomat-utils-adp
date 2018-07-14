@@ -80,7 +80,7 @@ if MIRROR:
 else:
 	EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 	EMAIL_HOST = "mail.uni-regensburg.de"
-	EMAIL_PORT = 465
+	EMAIL_PORT = 25
 
 DEFAULT_FROM_EMAIL = "praktomat@itsec.ur.de"
 
