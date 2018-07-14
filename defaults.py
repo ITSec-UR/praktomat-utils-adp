@@ -106,7 +106,10 @@ def load_defaults(settings):
         'accounts.middleware.AuthenticationMiddleware',	
         'accounts.middleware.LogoutInactiveUserMiddleware',
     )
+    d.AUTH_BACKEND = 'django.contrib.auth.backends.AllowAllUsersModelBackend'
 
+    d.AUTHENTICATION_BACKENDS = (d.AUTH_BACKEND,)
+	
     d.DEFAULT_FILE_STORAGE = 'utilities.storage.UploadStorage'
 
     # URL and file paths
@@ -114,7 +117,6 @@ def load_defaults(settings):
 
     d.STATICFILES_DIRS = (
 	     "/var/www/Praktomat/media/",
-    #    join(PRAKTOMAT_ROOT, "media"),
     )
 
     #d.STATIC_ROOT = join(PRAKTOMAT_ROOT, "static")
@@ -308,6 +310,9 @@ def load_defaults(settings):
 
     d.SHIB_USERNAME = "email"
     d.SHIB_PROVIDER = "kit.edu"
+
+    # URL to the MOTD page which will be shown on login page and task list
+    d.SYSADMIN_MOTD_URL = None
 
     # Set this to False to disable registration via the website, e.g. when
     # Single Sign On is used
