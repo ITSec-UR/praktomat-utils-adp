@@ -206,10 +206,10 @@ def load_defaults(settings):
     d.DEFAULT_FROM_EMAIL = "praktomat@itsec.ur.de"
     d.EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     d.EMAIL_HOST = "mail.uni-regensburg.de"
-    d.EMAIL_PORT = 465
+    d.EMAIL_PORT = 25
     d.EMAIL_HOST_USER = ""
     d.EMAIL_HOST_PASSWORD = ""
-    d.EMAIL_USE_TLS = True
+    d.EMAIL_USE_TLS = False
 
     # TinyMCE
 
