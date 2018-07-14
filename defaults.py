@@ -203,13 +203,13 @@ def load_defaults(settings):
     
     # Default email address to use for various automated correspondence from
     # the site manager(s).
-    d.DEFAULT_FROM_EMAIL = "kesdogan.technik@ur.de"
+    d.DEFAULT_FROM_EMAIL = "praktomat@itsec.ur.de"
     d.EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    d.EMAIL_HOST = "127.0.0.1"
-    d.EMAIL_PORT = 26
+    d.EMAIL_HOST = "mail.uni-regensburg.de"
+    d.EMAIL_PORT = 465
     d.EMAIL_HOST_USER = ""
     d.EMAIL_HOST_PASSWORD = ""
-    d.EMAIL_USE_TLS = False
+    d.EMAIL_USE_TLS = True
 
     # TinyMCE
 
