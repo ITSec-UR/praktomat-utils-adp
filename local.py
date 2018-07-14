@@ -1,9 +1,9 @@
 # Settings for deployment
 
-# These settings are KIT-specific and derive some parts of the settings
+# These settings are ITSec-UR-specific and derive some parts of the settings
 # from the directory name.
 #
-# If you are not deploying on praktomat.cs.kit.edu you need to rewrite this file.
+# If you are not deploying on praktomat.itsec.ur.de you need to rewrite this file.
 
 from os.path import join, dirname, basename
 import re
@@ -103,6 +103,8 @@ PRIVATE_KEY = '/srv/praktomat/mailsign/signer_key.pem'
 # Enable Shibboleth:
 SHIB_ENABLED = False
 REGISTRATION_POSSIBLE = True
+
+SYSADMIN_MOTD_URL = "https://praktomat.itsec.ur.de/sysadmin_motd.html"
 
 # Use a dedicated user to test submissions
 USEPRAKTOMATTESTER = False
