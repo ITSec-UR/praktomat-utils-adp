@@ -108,7 +108,7 @@ REGISTRATION_POSSIBLE = True
 USEPRAKTOMATTESTER = False
 
 # Use docker to test submission
-USESAFEDOCKER = True
+USESAFEDOCKER = False
 
 # Various extra files and versions
 CHECKSTYLEALLJAR = '/srv/praktomat/contrib/checkstyle-5.7-all.jar'
