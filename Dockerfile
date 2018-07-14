@@ -81,8 +81,10 @@ RUN chmod 755 Praktomat/src/settings/local.py \
  && chmod 755 Praktomat/docker-image/Dockerfile \
  && chmod 755 /usr/local/bin/safe-docker
  
-
+RUN sed -i 's/{% load motd %}//g' /var/www/Praktomat/src/templates/registration/login.html \
+ && sed -i 's/{% motd %}//g' /var/www/Praktomat/src/templates/registration/login.html
 # Migrate changes
+
 RUN ./Praktomat/src/manage-devel.py migrate --noinput
 RUN ./Praktomat/src/manage-local.py collectstatic --noinput -link
 
