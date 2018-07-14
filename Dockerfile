@@ -108,7 +108,7 @@ WORKDIR /srv/praktomat/mailsign/
 RUN python createkey.py
 RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
-# Docker setup
+# Docker setup (inactive)
 WORKDIR /var/www/Praktomat/
 RUN echo 'deb http://apt.dockerproject.org/repo ubuntu-xenial main' >> /etc/apt/sources.list.d/docker.list
 RUN apt-get update \
