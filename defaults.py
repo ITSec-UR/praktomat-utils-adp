@@ -42,7 +42,7 @@ def load_defaults(settings):
     # are inappropriate for public consumption. File paths, configuration options, 
     # and the like all give attackers extra information about your server.
     # Never deploy a site into production with DEBUG turned on.
-    d.DEBUG = True
+    d.DEBUG = False
 
     # Local time zone for this installation. Choices can be found here:
     # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -278,7 +278,7 @@ def load_defaults(settings):
  
     # Alternatively: Run everything in a docker instance, to provide higher
     # insulation. Should not be used together iwth USEPRAKTOMATTESTER.
-    d.USESAFEDOCKER = True
+    d.USESAFEDOCKER = False
 
     # Make sure uploaded solution are not work-readable
     d.FILE_UPLOAD_PERMISSIONS = 0640
