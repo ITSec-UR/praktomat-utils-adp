@@ -79,10 +79,10 @@ if MIRROR:
 	EMAIL_FILE_PATH = join(UPLOAD_ROOT, "sent-mails")
 else:
 	EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-	EMAIL_HOST = "localhost"
-	EMAIL_PORT = 25
+	EMAIL_HOST = "mail.uni-regensburg.de"
+	EMAIL_PORT = 465
 
-DEFAULT_FROM_EMAIL = "kesdogan.technik@ur.de"
+DEFAULT_FROM_EMAIL = "praktomat@itsec.ur.de"
 
 DEBUG = False
 
