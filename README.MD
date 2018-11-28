@@ -1,1 +1,1 @@
-Dockerfile for Praktomat
+Dockerfile for managing praktomat submissions

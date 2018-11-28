@@ -1,124 +1,15 @@
-FROM ubuntu:xenial
+FROM python:2.7-alpine3.8
 
 
-MAINTAINER Christoph Schreyer <christoph.schreyer@stud.uni-regensburg.de>
+LABEL maintainer="Christoph Schreyer <christoph.schreyer@stud.uni-regensburg.de>"
 
 
-# Install required packages
-RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install \
- apache2 \
- libpq-dev \ 
- zlib1g-dev \
- libmysqlclient-dev \
- libsasl2-dev \
- libssl-dev \
- swig \
- libapache2-mod-xsendfile \
- libapache2-mod-wsgi \
- openjdk-8-jdk \
- junit \
- junit4 \
- dejagnu \
- gcj-jdk \
- git-core \
- mutt \
- vim
-RUN apt-get -y install \
- python2.7-dev \
- python-setuptools \
- python-psycopg2 \
- python-m2crypto \
- python-pip \
- && rm -rf /var/lib/apt/lists/*
-
-RUN pip install --upgrade pip
- 
- 
-# Download & Install Praktomat
-WORKDIR /var/www/
-RUN git clone --recursive git://github.com/KITPraktomatTeam/Praktomat.git \
- && pip install -r Praktomat/requirements.txt
-
- 
-# Do postgres stuff (should already be set up)
-# RUN psql --username=postgres \
-# && CREATE USER praktomat; \
-# && CREATE DATABASE praktomat_1; \
-# && ALTER DATABASE praktomat_1 OWNER TO praktomat; \
-# && CREATE ROLE www-data IN ROLE praktomat; \
-# && \q 
-
-# RUN ( \
-# echo "" && \
-# echo "local praktomat_1 praktomat trust" && \
-# echo "local praktomat_1 www-data trust" ) >> /etc/postgresql/9.5/main/pg_hba.config
- 
- 
-# Create directories
-RUN mkdir -p /var/www/Praktomat/PraktomatSupport /var/www/Praktomat/data /srv/praktomat/mailsign
-
-# Add custom config files from praktomat repository
-COPY local.py Praktomat/src/settings/local.py 
-COPY defaults.py Praktomat/src/settings/defaults.py
-COPY Builder.py Praktomat/src/checker/compiler/Builder.py 
-COPY CBuilder.py Praktomat/src/checker/compiler/CBuilder.py 
-COPY manage-local.py Praktomat/src/manage-local.py
-COPY models.py Praktomat/src/configuration/models.py
-COPY createkey.py /srv/praktomat/mailsign/createkey.py
-COPY safe-Dockerfile Praktomat/docker-image/Dockerfile
-COPY safe-docker /usr/local/bin/safe-docker
-COPY ports.conf /etc/apache2/ports.conf
-COPY praktomat.conf /etc/apache2/sites-available/praktomat.conf
- 
-RUN chmod 755 Praktomat/src/settings/local.py \ 
- && chmod 755 Praktomat/src/settings/defaults.py \
- && chmod 755 Praktomat/src/checker/compiler/Builder.py \
- && chmod 755 Praktomat/src/checker/compiler/CBuilder.py \
- && chmod 755 Praktomat/src/manage-local.py \
- && chmod 755 Praktomat/src/configuration/models.py \
- && chmod 755 /srv/praktomat/mailsign/createkey.py \
- && chmod 755 Praktomat/docker-image/Dockerfile \
- && chmod 755 /usr/local/bin/safe-docker
- 
-RUN sed -i 's/{% load motd %}//g' /var/www/Praktomat/src/templates/registration/login.html \
- && sed -i 's/{% motd %}//g' /var/www/Praktomat/src/templates/registration/login.html
-# Migrate changes
-
-RUN ./Praktomat/src/manage-devel.py migrate --noinput
-RUN ./Praktomat/src/manage-local.py collectstatic --noinput -link
-
-
-# Set permissions for Praktomat directory
-RUN adduser --disabled-password --gecos '' praktomat
-RUN chmod -R 0775 Praktomat/ \
- && chown -R praktomat Praktomat/ \
- && chgrp -R praktomat Praktomat/ \
- && adduser www-data praktomat
- 
- 
- # Configure apache
-RUN service apache2 start \ 
- && a2enmod wsgi \
- && a2enmod rewrite \
- && a2ensite praktomat.conf \
- && service apache2 restart 
- 
-
-# Add mailsign
-WORKDIR /srv/praktomat/mailsign/
-RUN python createkey.py
-RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-
-# Docker setup (inactive)
-WORKDIR /var/www/Praktomat/
-RUN echo 'deb http://apt.dockerproject.org/repo ubuntu-xenial main' >> /etc/apt/sources.list.d/docker.list
-RUN apt-get update \
- && apt-get -y install linux-image-extra-4.4.0-128-generic
-RUN apt-get -y install docker-engine
-RUN service docker start
-RUN apt-get --trivial-only install sudo
-RUN echo 'Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"\n\nroot    ALL=(ALL:ALL) ALL\n\n%sudo   ALL=(ALL:ALL) ALL\n\n%praktomat ALL=NOPASSWD:ALL\npraktomat ALL=NOPASSWD:ALL\nwww-data ALL=NOPASSWD:ALL\ndeveloper ALL=NOPASSWD:ALL\npraktomat ALL= NOPASSWD: /usr/local/bin/safe-docker' >> /etc/sudoers \
- && echo 'www-data ALL=(TESTER)NOPASSWD:ALL\npraktomat ALL=(TESTER)NOPASSWD:ALL, NOPASSWD:/usr/local/bin/safe-docker' >> /etc/sudoers.d/praktomat_tester
-
-EXPOSE 25 9002
+RUN apk add cron sed
+RUN mkdir /usr/local/bin
+COPY praktomat_grading.py /usr/local/bin/praktomat_grading.py
+RUN sed -i "s/DB_HOST/${HOST}/g" /usr/local/bin/praktomat_grading.py \
+&& sed -i "s/DB_PORT/${PORT}/g" /usr/local/bin/praktomat_grading.py \
+&& sed -i "s/DB_NAME/${NAME}/g" /usr/local/bin/praktomat_grading.py \
+&& sed -i "s/DB_USER/${USER}/g" /usr/local/bin/praktomat_grading.py \
+&& sed -i "s/DB_PASS/${PASS}/g" /usr/local/bin/praktomat_grading.py
+RUN echo "0 2 * * 2 python /usr/local/bin/praktomat_grading.py" | crontab -e
