@@ -1,10 +1,12 @@
-FROM python:2.7-alpine3.8
+FROM python:2.7.15
 
 
 LABEL maintainer="Christoph Schreyer <christoph.schreyer@stud.uni-regensburg.de>"
 
 
-RUN apk add cron sed
+RUN apt-get update \
+ && apt-get install -y cron \
+
 RUN mkdir /usr/local/bin
 COPY praktomat_grading.py /usr/local/bin/praktomat_grading.py
 RUN sed -i "s/DB_HOST/${HOST}/g" /usr/local/bin/praktomat_grading.py \
