@@ -17,3 +17,4 @@ RUN sed -i "s/DB_HOST/${HOST}/g" /usr/local/bin/praktomat_grading.py \
 && sed -i "s/DB_PASS/${PASS}/g" /usr/local/bin/praktomat_grading.py
 RUN echo "0 2 * * 2 root python /usr/local/bin/praktomat_grading.py" >> /etc/crontab
 
+EXPOSE 25
