@@ -5,7 +5,9 @@ LABEL maintainer="Christoph Schreyer <christoph.schreyer@stud.uni-regensburg.de>
 
 
 RUN apt-get update \
- && apt-get install -y cron
+ && apt-get install -y \
+ cron \
+ vim
 
 COPY praktomat_grading.py /usr/local/bin/praktomat_grading.py
 RUN sed -i "s/DB_HOST/${HOST}/g" /usr/local/bin/praktomat_grading.py \
