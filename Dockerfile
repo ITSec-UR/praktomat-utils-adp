@@ -5,7 +5,7 @@ LABEL maintainer="Christoph Schreyer <christoph.schreyer@stud.uni-regensburg.de>
 
 
 RUN apt-get update \
- && apt-get install -y cron \
+ && apt-get install -y cron
 
 RUN mkdir /usr/local/bin
 COPY praktomat_grading.py /usr/local/bin/praktomat_grading.py
