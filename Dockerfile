@@ -11,7 +11,7 @@ RUN apt-get update \
 
 
 # Add grading scripts
-COPY praktomat_grading.py /usr/local/bin/praktomat_limit_submissions.py
+COPY praktomat_limit_submissions.py /usr/local/bin/praktomat_limit_submissions.py
 RUN chmod +x /usr/local/bin/praktomat_limit_submissions.py
 
 
