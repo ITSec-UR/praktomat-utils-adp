@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 import psycopg2
@@ -32,7 +32,8 @@ def get_rating(conn, rating_name):
         rating_name
     )
     print(query_get_rating)
-    return run_sql(conn, query_get_rating)[0]
+    rating = run_sql(conn, query_get_rating)[0][0]
+    return rating
 
 
 def run_sql(conn, sql):
@@ -67,9 +68,15 @@ def connect_db():
 max_uploads = (
     os.environ["PRAKTOMAT_MAX_UPLOADS"] if "PRAKTOMAT_MAX_UPLOADS" in os.environ else 3
 )
+print("Run Praktomat limit homework solutions to {}".format(max_uploads))
+
 conn = connect_db()
+if not conn:
+    print("No connection is established!")
+    exit(1)
+
 rating_scale = get_rating(conn, "SBL")
 tasks = get_tasks(conn, "(OOP|ADP): H[0-9]{2}%", rating_scale)
 for task in tasks:
-    limit_submissions(conn, task, max_uploads)
+    limit_submissions(conn, task[0], max_uploads)
 conn.close()

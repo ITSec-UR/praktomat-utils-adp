@@ -13,5 +13,5 @@ RUN pip3 install psycopg2
 
 
 # Add required scripts
-COPY praktomat_limit_submissions.py /
-RUN chmod +x praktomat_limit_submissions.py
+ADD ./praktomat_limit_submissions.py /
+CMD python3 /praktomat_limit_submissions.py
