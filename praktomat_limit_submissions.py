@@ -58,5 +58,5 @@ max_uploads = (
 conn = connect_db()
 tasks = get_tasks(conn, "(OOP|ADP): H[0-9]{2}%")
 for task in tasks:
-    limit_submissions(task, max_uploads)
+    limit_submissions(conn, task, max_uploads)
 conn.close()
