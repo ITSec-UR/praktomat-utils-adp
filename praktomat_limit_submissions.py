@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import psycopg2
+import os
 
 
 def limit_submissions(max_upload):
@@ -22,4 +23,7 @@ def limit_submissions(max_upload):
         print(error)
 
 
-limit_submissions(3)
+max_uploads = (
+    os.environ["PRAKTOMAT_MAX_UPLOADS"] if "PRAKTOMAT_MAX_UPLOADS" in os.environ else 3
+)
+limit_submissions(max_uploads)
