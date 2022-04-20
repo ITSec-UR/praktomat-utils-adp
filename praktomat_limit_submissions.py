@@ -20,7 +20,7 @@ def limit_submissions(conn, task, max_upload):
 
 
 def get_tasks(conn, regex_task, rating_scale):
-    query_get_tasks = "SELECT id FROM tasks_task WHERE title SIMILAR TO '{}' AND final_grade_rating_scale_id = {} ORDER BY id ASC;".format(
+    query_get_tasks = "SELECT id FROM tasks_task WHERE title SIMILAR TO '{}' AND final_grade_rating_scale_id = {} AND submission_date < now() AND publication_date > now() - INTERVAL '14 DAY'ORDER BY id ASC;".format(
         regex_task, rating_scale
     )
     print(query_get_tasks)
