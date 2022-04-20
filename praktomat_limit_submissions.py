@@ -75,7 +75,7 @@ if not conn:
     print("No connection is established!")
     exit(1)
 
-rating_scale = get_rating(conn, "SBL")
+rating_scale = get_rating(conn, os.environ["PRAKTOMAT_HOMEWORK"])
 tasks = get_tasks(conn, "(OOP|ADP): H[0-9]{2}%", rating_scale)
 for task in tasks:
     limit_submissions(conn, task[0], max_uploads)
