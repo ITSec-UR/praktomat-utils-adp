@@ -19,9 +19,9 @@ def limit_submissions(conn, task, max_upload):
     run_sql(conn, query_max)
 
 
-def get_tasks(conn, regex_task, rating_scale):
-    query_get_tasks = "SELECT id FROM tasks_task WHERE title SIMILAR TO '{}' AND final_grade_rating_scale_id = {} AND submission_date < now() AND publication_date > now() - INTERVAL '14 DAY'ORDER BY id ASC;".format(
-        regex_task, rating_scale
+def get_tasks(conn, regex_task):
+    query_get_tasks = "SELECT id FROM tasks_task WHERE title SIMILAR TO '{}' AND submission_date < now() AND publication_date > now() - INTERVAL '14 DAY'ORDER BY id ASC;".format(
+        regex_task
     )
     print(query_get_tasks)
     return run_sql(conn, query_get_tasks)
@@ -75,8 +75,7 @@ if not conn:
     print("No connection is established!")
     exit(1)
 
-rating_scale = get_rating(conn, os.environ["PRAKTOMAT_HOMEWORK"])
-tasks = get_tasks(conn, "(OOP|ADP): H[0-9]{2}%", rating_scale)
+tasks = get_tasks(conn, "(OOP|ADP): H[0-9]{2}%")
 for task in tasks:
     limit_submissions(conn, task[0], max_uploads)
 conn.close()
